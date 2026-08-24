@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071a2f" />
+  <meta name="description" content="Campus Viva — protótipo acadêmico de engajamento universitário." />
+  <title>Campus Viva — Protótipo Interativo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="logo">CV</div>
+        <div>
+          <strong>Campus Viva</strong>
+          <span>Engajamento universitário</span>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Navegação principal">
+        <button class="nav-btn active" data-panel="inicio">⌂ <span>Início</span></button>
+        <button class="nav-btn" data-panel="eventos">◫ <span>Eventos</span></button>
+        <button class="nav-btn" data-panel="recompensas">★ <span>Recompensas</span></button>
+        <button class="nav-btn" data-panel="ranking">↗ <span>Ranking</span></button>
+        <button class="nav-btn" data-panel="coordenacao">▥ <span>Coordenação</span></button>
+        <button class="nav-btn" data-panel="cadastro">＋ <span>Nova atividade</span></button>
+      </nav>
+
+      <div class="team">
+        <span>Projeto acadêmico</span>
+        <strong>UNIFAFIBE</strong>
+        <small>Victor Camolesi • Kevin Alves Nacata • Arthur Duarte • Davi Zacarone</small>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+          <div>
+            <h1 id="pageTitle">Visão geral</h1>
+            <p>Protótipo navegável — sem banco de dados.</p>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn ghost" id="roleBtn">Visão da coordenação</button>
+          <button class="btn primary" id="checkinBtn">Fazer check-in</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="panel active" id="panel-inicio">
+          <div class="hero-grid">
+            <article class="hero">
+              <span class="pill">Quinta-feira é no campus</span>
+              <h2>Mais motivos para ficar.<br><span>Mais motivos para participar.</span></h2>
+              <p>
+                O Campus Viva reúne eventos, desafios, recompensas e experiências
+                para aumentar o engajamento dos alunos e fortalecer a vida universitária.
+              </p>
+              <div class="hero-actions">
+                <button class="btn primary" data-go="eventos">Ver atividades de hoje</button>
+                <button class="btn hero-secondary" data-go="coordenacao">Ver indicadores</button>
+              </div>
+              <div class="hero-note">Problema real + solução prática + validação por piloto</div>
+            </article>
+
+            <article class="level-card card">
+              <div class="level-head">
+                <div>
+                  <span class="muted">Olá, Ana 👋</span>
+                  <h3>Nível 4</h3>
+                </div>
+                <div class="points-big"><span id="heroPoints">320</span><small> pts</small></div>
+              </div>
+              <div class="progress"><span style="width:80%"></span></div>
+              <p class="muted">Faltam 80 pontos para o Nível 5.</p>
+              <div class="mini-stats">
+                <div><b>12</b><span>check-ins</span></div>
+                <div><b>4</b><span>cupons</span></div>
+                <div><b>#18</b><span>ranking</span></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="kpi-grid">
+            <article class="card kpi"><span>Check-ins no mês</span><strong>12</strong><small>+20% vs. mês anterior</small></article>
+            <article class="card kpi"><span>Eventos disponíveis</span><strong>8</strong><small>3 nesta quinta</small></article>
+            <article class="card kpi"><span>Cupons resgatados</span><strong>4</strong><small>R$ 46 em benefícios</small></article>
+            <article class="card kpi"><span>Posição no ranking</span><strong>#18</strong><small>entre 342 alunos</small></article>
+          </div>
+
+          <div class="section-title">
+            <div>
+              <h2>Atividades em destaque</h2>
+              <p>Uma programação pensada para aumentar a permanência no campus.</p>
+            </div>
+          </div>
+          <div class="event-grid" id="homeEvents"></div>
+        </section>
+
+        <section class="panel" id="panel-eventos">
+          <div class="section-title">
+            <div>
+              <h2>Agenda de atividades</h2>
+              <p>Eventos, oficinas, desafios e ações de convivência.</p>
+            </div>
+            <select class="select" id="eventFilter">
+              <option value="todos">Todos</option>
+              <option value="acadêmico">Acadêmico</option>
+              <option value="convivência">Convivência</option>
+              <option value="esporte">Esporte</option>
+            </select>
+          </div>
+          <div class="event-grid" id="eventList"></div>
+        </section>
+
+        <section class="panel" id="panel-recompensas">
+          <div class="reward-top">
+            <article class="card balance">
+              <span class="muted">Saldo disponível</span>
+              <strong><span id="points">320</span> pts</strong>
+              <p>Use os pontos para resgatar benefícios.</p>
+            </article>
+            <article class="card">
+              <h3>Como ganhar pontos?</h3>
+              <p class="muted">Faça check-in em eventos, participe de desafios, envie feedbacks e complete missões especiais.</p>
+              <div class="chips"><span>+30 check-in</span><span>+20 feedback</span><span>+50 desafio</span></div>
+            </article>
+          </div>
+          <article class="card">
+            <h3>Catálogo de recompensas</h3>
+            <div id="rewardList"></div>
+          </article>
+        </section>
+
+        <section class="panel" id="panel-ranking">
+          <div class="two-col">
+            <article class="card">
+              <h3>Ranking geral dos alunos</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>#</th><th>Aluno</th><th>Curso</th><th>Pontos</th></tr></thead>
+                  <tbody id="rankingBody"></tbody>
+                </table>
+              </div>
+            </article>
+            <article class="card">
+              <h3>Ranking por curso</h3>
+              <div id="courseRanking"></div>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-coordenacao">
+          <div class="section-title">
+            <div><h2>Painel da coordenação</h2><p>Indicadores simulados do piloto do Campus Viva.</p></div>
+            <span class="status">Piloto ativo</span>
+          </div>
+
+          <div class="kpi-grid">
+            <article class="card kpi"><span>Participações</span><strong>1.248</strong><small>+12% no mês</small></article>
+            <article class="card kpi"><span>Alunos únicos</span><strong>842</strong><small>+9% no mês</small></article>
+            <article class="card kpi"><span>Taxa de adesão</span><strong>67%</strong><small>+8 p.p.</small></article>
+            <article class="card kpi"><span>Retorno às aulas</span><strong>74%</strong><small>meta: 80%</small></article>
+          </div>
+
+          <div class="two-col dashboard-gap">
+            <article class="card">
+              <h3>Evolução da participação às quintas</h3>
+              <div class="chart" aria-label="Gráfico de participação">
+                <div class="bar" style="--h:32%"><span></span><small>Sem 1</small></div>
+                <div class="bar" style="--h:45%"><span></span><small>Sem 2</small></div>
+                <div class="bar" style="--h:55%"><span></span><small>Sem 3</small></div>
+                <div class="bar" style="--h:61%"><span></span><small>Sem 4</small></div>
+                <div class="bar" style="--h:72%"><span></span><small>Sem 5</small></div>
+                <div class="bar" style="--h:81%"><span></span><small>Sem 6</small></div>
+                <div class="bar" style="--h:88%"><span></span><small>Sem 7</small></div>
+              </div>
+            </article>
+            <article class="card">
+              <h3>Indicadores do piloto</h3>
+              <div class="metric-list">
+                <div><span>Permanência no campus</span><b>+18%</b></div>
+                <div><span>Participação em ações</span><b>+31%</b></div>
+                <div><span>Retorno após intervalo</span><b>74%</b></div>
+                <div><span>Satisfação dos alunos</span><b>4,6/5</b></div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" id="panel-cadastro">
+          <article class="card form-card">
+            <div>
+              <span class="pill light">Área administrativa</span>
+              <h2>Cadastrar nova atividade</h2>
+              <p class="muted">Os dados são adicionados apenas durante esta demonstração.</p>
+            </div>
+            <form id="activityForm">
+              <label>Nome da atividade
+                <input id="activityTitle" required placeholder="Ex.: Oficina de Inteligência Artificial">
+              </label>
+              <label>Categoria
+                <select id="activityCategory">
+                  <option>Acadêmico</option>
+                  <option>Convivência</option>
+                  <option>Esporte</option>
+                </select>
+              </label>
+              <div class="form-row">
+                <label>Horário<input id="activityTime" type="time" value="19:00"></label>
+                <label>Pontos<input id="activityPoints" type="number" min="10" max="500" value="40"></label>
+              </div>
+              <button class="btn primary" type="submit">Cadastrar atividade</button>
+            </form>
+          </article>
+        </section>
+      </div>
+    </main>
+
+    <div class="modal" id="checkinModal" aria-hidden="true">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" id="closeModal" aria-label="Fechar">×</button>
+        <span class="pill light">Check-in</span>
+        <h2 id="modalTitle">Escaneie o QR Code</h2>
+        <p class="muted">Nesta demonstração, basta confirmar para simular a leitura.</p>
+        <div class="qr" aria-label="QR Code ilustrativo"></div>
+        <button class="btn primary full" id="confirmCheckin">Confirmar check-in +30 pontos</button>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" aria-live="polite"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
